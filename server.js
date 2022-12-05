@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT||4000
 const path = require('path')
-const cors = require('cors')
+const cors = require('cors') 
+const corsOptions = require('./config/cors')
 
 require('dotenv').config()
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 app.use('/',express.static(path.join(__dirname, '/public')));

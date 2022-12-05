@@ -10,10 +10,9 @@ const button = document.querySelector('.button');
 const elConditionStatsUl = elWeatherContainer.querySelector('ul');
 const elWeatherIcon = document.querySelector('#conditionIcon');
 const elLocationHeader = document.querySelectorAll('.noData');
-let userLocation = ''
+let userLocation = '';
 
 browserLocation();
-console.log(elLocationHeader[1]);
 elLocationHeader[1].style.display = 'none';
 
 elSearchForm.addEventListener('submit', (e) => {
@@ -77,7 +76,6 @@ const futureWeather = {
 };
 
 function dailyForecast(data) {
-  console.log(data);
   const forecastDay = data?.forecast?.forecastday;
   if (forecastDay) {
     forecastDay.forEach((obj) => {
@@ -118,23 +116,34 @@ function militaryToStandardTime(time) {
   let minutes = militaryTime.split(':')[1];
   let standardTime;
 
-  if (hours === 0) {
-    hours = 12;
-  }
   hours > 12
     ? (standardTime = `${hours - 12} pm`)
     : (standardTime = `${hours} am`);
+
+  if (hours === 0) {
+    standardTime = `12 am`;
+  } else if (hours === 12) {
+    standardTime = `12 pm`;
+  }
+
   return standardTime;
 }
 
 function hourlyForecast(data) {
   let todaysHourData = data?.forecast?.forecastday[0]?.hour;
+
   if (todaysHourData) {
     todaysHourData.forEach((obj) => {
       let hour = militaryToStandardTime(obj.time);
+      // const currentDate = new Date().toString()
+      // const currentHour = currentDate.match(/[0-24]{2}(?=:)/)
+      // const dataHour = hour.match(/[0-24]{2}/)
+      // console.log('current hour',currentHour[0])
+      // console.log('datas hour',dataHour)
+
       let image = obj?.condition?.icon;
       let tempF = obj?.temp_f;
-      console.log(hour[1]);
+
       if (hour.replace(/am|pm/, '') % 2 === 0) {
         const mainContainer = document.querySelector('.allHourly');
 
@@ -162,7 +171,6 @@ function hourlyForecast(data) {
 }
 
 async function getWeatherData() {
-  // console.log(userLocation)
   const options = {
     method: 'POST',
     headers: { 'Content-type': 'application/json' },
@@ -174,12 +182,11 @@ async function getWeatherData() {
   try {
     let results = await fetch(weatherURL, options);
     if (results.status !== 200) return;
-    console.log('INITIAL RESULTS', results);
+
     results = await results.json();
-    console.log('JSON RESULTS', results);
+
     return results;
   } catch (error) {
-    console.log('sporadic error', error);
     return;
   }
 }
@@ -219,16 +226,13 @@ async function weatherData() {
 }
 async function browserLocation() {
   await navigator.geolocation.getCurrentPosition((x) => {
-    
-    localStorage.setItem('coord',`${x.coords.latitude},${x.coords.longitude}`)
+    localStorage.setItem('coord', `${x.coords.latitude},${x.coords.longitude}`);
     currentWeather.search = localStorage.getItem('coord');
-    
+
     weatherData();
   });
 }
 
 weatherData();
-
-
 
 //
