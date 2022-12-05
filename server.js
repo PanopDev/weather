@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT||4200
+const PORT = process.env.PORT||4000
 const path = require('path')
 const cors = require('cors')
 
@@ -12,4 +12,4 @@ app.use('/',express.static(path.join(__dirname, '/public')));
 app.use('/', require('./routes/root'))
 app.use('/weather',require('./routes/weather'))
 
-app.listen(PORT,()=>{console.log(`listening on port 4200`)})
+app.listen(PORT,()=>{console.log(`listening on ${PORT}`)})

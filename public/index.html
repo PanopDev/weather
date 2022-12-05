@@ -10,10 +10,12 @@
   </head>
   <body>
     <div class="weatherContainer">
-      <label class="label" style="display: none" for="search">Location</label>
-      <p class="noData">Enter Location</p>
-      <p class="noData">No Location found!</p>
+      
+      
       <form id="searchForm">
+        <label class="label" style="display: none" for="search">Location</label>
+        <p class="noData">Enter Location</p>
+      <p class="noData">No Location found!</p>
         <input type="search" name="searchbox" autofocus placeholder=" City State or Zip " id="search" /><button
           class="button"
           type="submit"
@@ -25,7 +27,7 @@
       </form>
       
       <div class="main-image-div">
-        <h3>Searching for current location....<br>If location is not enabled,<br> use search bar instead.</h3>
+        <h3>Loading..</h3>
         <div class="main-image-head">
           <img id="conditionIcon" />
           <h1></h1>

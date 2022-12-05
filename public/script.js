@@ -10,7 +10,7 @@ const button = document.querySelector('.button');
 const elConditionStatsUl = elWeatherContainer.querySelector('ul');
 const elWeatherIcon = document.querySelector('#conditionIcon');
 const elLocationHeader = document.querySelectorAll('.noData');
-let userLocation = '';
+let userLocation = ''
 
 browserLocation();
 console.log(elLocationHeader[1]);
@@ -36,7 +36,7 @@ const currentWeather = {
     this.location = location;
     weatherData();
   },
-  location: 'Los Angeles',
+  location: localStorage.getItem('coord') || 'Boston',
   name: (data) => {
     elLocation.innerText = `${data?.location?.name}, ${data?.location?.region}`;
   },
@@ -162,7 +162,7 @@ function hourlyForecast(data) {
 }
 
 async function getWeatherData() {
-  console.log(userLocation)
+  // console.log(userLocation)
   const options = {
     method: 'POST',
     headers: { 'Content-type': 'application/json' },
@@ -219,11 +219,15 @@ async function weatherData() {
 }
 async function browserLocation() {
   await navigator.geolocation.getCurrentPosition((x) => {
-    currentWeather.search = `${x.coords.latitude},${x.coords.longitude}`;
+    
+    localStorage.setItem('coord',`${x.coords.latitude},${x.coords.longitude}`)
+    currentWeather.search = localStorage.getItem('coord');
     
     weatherData();
   });
 }
+
+weatherData();
 
 
 
