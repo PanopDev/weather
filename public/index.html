@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather</title>
+  </head>
+  <body>
+    <div class="weatherContainer">
+      <label class="label" style="display: none" for="search">Location</label>
+      <p class="noData">Enter Location</p>
+      <p class="noData">No Location found!</p>
+      <form id="searchForm">
+        <input type="search" name="searchbox" autofocus placeholder=" City State or Zip " id="search" /><button
+          class="button"
+          type="submit"
+        >
+          Search
+        </button>
+      
+        
+      </form>
+      
+      <div class="main-image-div">
+        <h3>Searching for current location....<br>If location is not enabled,<br> use search bar instead.</h3>
+        <div class="main-image-head">
+          <img id="conditionIcon" />
+          <h1></h1>
+        </div>
+        <ul class="ulTest">
+          <li class="liStats">Feels like:68</li>
+          <li class="liStats">Wind Speed: 4.3mph</li>
+          <li class="liStats">Wind gusts up to 8.9mph</li>
+          <li class="liStats">Humidity: 90</li>
+          <li class="liStats">UV index : 1</li>
+        </ul>
+        <div class="allHourly"></div>
+      </div>
+      <div class="forecast"></div>
+    </div>
+  </body>
+</html>
