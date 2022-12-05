@@ -1,6 +1,6 @@
 const cors = require('cors');
 
-const acceptedOrigins = ['https://panopdevweather.onrender.com/']
+const acceptedOrigins = ['https://panopdevweather.onrender.com']
 
 const corsOptions = {
     origin: function(origin,callback){
